@@ -1,0 +1,6 @@
+body { font-family: Arial; background:#f2f2f2; }
+.pos-container { width: 350px; margin: 40px auto; padding:20px; background:white; border-radius:10px; }
+input { padding:8px; margin:5px; width:130px; }
+button { padding:8px 15px; }
+table { width:100%; margin-top:10px; }
+th, td { padding:8px; border-bottom:1px solid #ddd; }
