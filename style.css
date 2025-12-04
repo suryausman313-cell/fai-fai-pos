@@ -1,1 +1,25 @@
-body { font-family: Arial; }
+body { font-family: Arial; }:root{
+  --bg:#fff; --text:#222; --accent:#f07b3f; --muted:#666;
+}
+[data-theme="dark"]{ --bg:#0f1720; --text:#e6eef7; --accent:#ff8a4b; --muted:#9fb0c0; }
+
+*{box-sizing:border-box}
+body{font-family:system-ui,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text); margin:0; padding:0;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#222;color:#fff}
+.topbar h1{margin:0;font-size:18px}
+.container{padding:20px;max-width:1100px;margin:0 auto}
+.card{background:rgba(255,255,255,0.06);padding:20px;border-radius:8px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:12px 18px;border-radius:8px;border:0;background:#eee;color:#222;cursor:pointer}
+.btn.orange{background:var(--accent);color:#fff}
+.hidden{display:none}
+.modal{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center}
+.modal-content{background:var(--bg);padding:20px;border-radius:8px;width:320px}
+.modal-content input{display:block;width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+#menuList{display:flex;gap:12px;flex-wrap:wrap}
+.menu-item{padding:10px;background:#fff;border-radius:6px;min-width:130px;cursor:pointer}
+.cart{margin-top:12px;background:transparent}
+.receipt{padding:20px;width:280px;background:#fff;color:#000}
+.foot{padding:12px;text-align:center;color:var(--muted)}
+.msg{color:red;margin-top:8px}
