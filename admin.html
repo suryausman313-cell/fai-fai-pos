@@ -1,1 +1,95 @@
-<h1>Admin Panel</h1>
+<h1>Admin Panel</h1><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAI FAI JUICE POS</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>FAI FAI JUICE POS</h1>
+    <div class="controls">
+      <button id="themeToggle">Dark</button>
+      <a id="installBtn" style="display:none">Install App</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="welcome" class="card">
+      <h2>Welcome!</h2>
+      <div class="buttons">
+        <button id="adminBtn" class="btn orange">Admin Panel</button>
+        <button id="cashierBtn" class="btn orange">Cashier Login</button>
+        <button id="productsBtn" class="btn">Products & Menu</button>
+        <button id="reportsBtn" class="btn">Reports</button>
+      </div>
+    </section>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal hidden">
+      <div class="modal-content">
+        <h3 id="loginTitle">Login</h3>
+        <input id="username" placeholder="username" />
+        <input id="password" type="password" placeholder="password" />
+        <div class="modal-actions">
+          <button id="loginSubmit" class="btn orange">Sign In</button>
+          <button id="loginCancel" class="btn">Cancel</button>
+        </div>
+        <p id="loginMsg" class="msg"></p>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <section id="adminPanel" class="card hidden">
+      <h2>Admin Panel</h2>
+      <div class="admin-grid">
+        <div>
+          <h4>Add Product</h4>
+          <input id="pName" placeholder="Name" />
+          <input id="pPrice" placeholder="Price" />
+          <button id="addProduct" class="btn">Add</button>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <ul id="productList"></ul>
+        </div>
+        <div>
+          <h4>Export</h4>
+          <button id="exportBtn" class="btn">Download ZIP (instructions)</button>
+        </div>
+      </div>
+      <button id="adminBack" class="btn">Back</button>
+    </section>
+
+    <!-- CASHIER AREA -->
+    <section id="cashierArea" class="card hidden">
+      <h2>Cashier</h2>
+      <div id="menuList"></div>
+      <div class="cart">
+        <h4>Cart</h4>
+        <ul id="cartItems"></ul>
+        <div>
+          <span>Total: ₹<span id="total">0.00</span></span>
+          <button id="checkout" class="btn orange">Checkout & Print</button>
+        </div>
+        <button id="cashierBack" class="btn">Back</button>
+      </div>
+    </section>
+
+    <!-- RECEIPT (hidden view used for print) -->
+    <div id="receiptView" class="hidden">
+      <div id="receiptContent" class="receipt">
+        <h3>FAI FAI JUICE</h3>
+        <p id="rDate"></p>
+        <ul id="rItems"></ul>
+        <p>Total: ₹<span id="rTotal"></span></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">© 2025 FAI FAI JUICE — All Rights Reserved</footer>
+</body>
+</html>
