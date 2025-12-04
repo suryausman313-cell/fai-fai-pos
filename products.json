@@ -1,0 +1,26 @@
+[
+  {
+    "id": "P001",
+    "name": "Orange Juice 500ml",
+    "price": 5.0,
+    "cat": "Juices"
+  },
+  {
+    "id": "P002",
+    "name": "Apple Juice 500ml",
+    "price": 5.5,
+    "cat": "Juices"
+  },
+  {
+    "id": "P003",
+    "name": "Mango Shake",
+    "price": 7.0,
+    "cat": "Shakes"
+  },
+  {
+    "id": "P004",
+    "name": "Bottled Water",
+    "price": 1.5,
+    "cat": "Drinks"
+  }
+]

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login — Fai-Fai POS</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="centered">
+  <div class="card">
+    <h2>Login (Demo)</h2>
+    <form id="login">
+      <input id="email" placeholder="email" required />
+      <input id="pass" placeholder="password" type="password" required />
+      <button class="btn primary">Login</button>
+    </form>
+    <p class="muted">This is a demo login (no backend). Click login to return to POS.</p>
+  </div>
+  <script>
+    document.getElementById('login').onsubmit = (e) => {
+      e.preventDefault();
+      // mock - just go back
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
