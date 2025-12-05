@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kitchen Screen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { font-family: Arial; background:#eee; padding:20px; }
+.order { background:#fff; padding:15px; margin:10px 0; border-radius:8px; box-shadow:0 2px 4px #aaa; }
+.order.new { border-left:8px solid red; }
+.order.process { border-left:8px solid orange; }
+.order.done { border-left:8px solid green; }
+button { padding:8px 12px; border:none; border-radius:6px; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<h2>Kitchen Orders</h2>
+<div id="orders"></div>
+
+<audio id="alertSound">
+<source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg">
+</audio>
+
+<script>
+let lastCount = 0;
+
+function loadOrders() {
+    let orders = JSON.parse(localStorage.getItem("kitchenOrders") || "[]");
+    let box = document.getElementById("orders");
+    box.innerHTML = "";
+
+    if (orders.length > lastCount) {
+        document.getElementById("alertSound").play();
+    }
+    lastCount = orders.length;
+
+    orders.forEach(o => {
+        box.innerHTML += `
+            <div class="order ${o.status.toLowerCase()}">
+                <h3>Order #${o.id}</h3>
+                <p><b>Time:</b> ${o.time}</p>
+                <ul>
+                    ${o.items.map(i => `<li>${i.name} (${i.price} AED)</li>`).join("")}
+                </ul>
+
+                <button onclick="changeStatus(${o.id}, 'IN-PROCESS')">Start</button>
+                <button onclick="changeStatus(${o.id}, 'DONE')">Done</button>
+            </div>
+        `;
+    });
+}
+
+function changeStatus(id, newStatus) {
+    let orders = JSON.parse(localStorage.getItem("kitchenOrders") || "[]");
+    orders = orders.map(o => {
+        if (o.id == id) o.status = newStatus;
+        return o;
+    });
+    localStorage.setItem("kitchenOrders", JSON.stringify(orders));
+    loadOrders();
+}
+
+setInterval(loadOrders, 1500);
+</script>
+
+</body>
+</html>
