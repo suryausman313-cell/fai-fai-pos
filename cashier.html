@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cashier - FAI FAI JUICE POS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<h2>Cashier Panel</h2>
+
+<section id="menu">
+    <h3>Menu</h3>
+    <ul id="product-list"></ul>
+</section>
+
+<section id="cart">
+    <h3>Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: AED <span id="total">0.00</span></strong></p>
+
+    <h3>Choose Payment</h3>
+    <button class="payment-btn" onclick="checkout('cash')">Cash</button>
+    <button class="payment-btn" onclick="checkout('visa')">VISA</button>
+    <button class="payment-btn" onclick="checkout('talabat')">Talabat</button>
+    <button class="payment-btn" onclick="checkout('noon')">Noon</button>
+
+    <button onclick="printReceipt()">Print Receipt</button>
+</section>
+
+<script src="app.js"></script>
+
+<script>
+function checkout(type) {
+    let total = document.getElementById("total").innerText;
+    let payments = JSON.parse(localStorage.getItem("payments") || "[]");
+    payments.push({
+        amount: total,
+        method: type,
+        date: new Date().toISOString()
+    });
+    localStorage.setItem("payments", JSON.stringify(payments));
+    alert("Payment Successful: " + type.toUpperCase());
+    location.reload();
+}
+
+function printReceipt() {
+    window.print();
+}
+</script>
+
+</body>
+</html>
