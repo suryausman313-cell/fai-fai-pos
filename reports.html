@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Report</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .box { border: 1px solid #ccc; padding: 15px; margin: 10px 0; }
+        h2 { margin-top: 0; }
+        button { padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Daily Sales Report</h1>
+
+<div class="box">
+    <h2>Totals</h2>
+    <p>Cash: AED <span id="cash">0.00</span></p>
+    <p>Visa: AED <span id="visa">0.00</span></p>
+    <p>Talabat: AED <span id="talabat">0.00</span></p>
+    <p>Noon: AED <span id="noon">0.00</span></p>
+    <hr>
+    <h3>Total Sales: AED <span id="total">0.00</span></h3>
+</div>
+
+<button onclick="window.print()">Print Report</button>
+
+<script>
+    let data = JSON.parse(localStorage.getItem("payments") || "[]");
+
+    let cash = 0, visa = 0, talabat = 0, noon = 0;
+
+    data.forEach(p => {
+        if (p.method === "cash") cash += p.amount;
+        if (p.method === "visa") visa += p.amount;
+        if (p.method === "talabat") talabat += p.amount;
+        if (p.method === "noon") noon += p.amount;
+    });
+
+    document.getElementById("cash").innerText = cash.toFixed(2);
+    document.getElementById("visa").innerText = visa.toFixed(2);
+    document.getElementById("talabat").innerText = talabat.toFixed(2);
+    document.getElementById("noon").innerText = noon.toFixed(2);
+
+    document.getElementById("total").innerText =
+        (cash + visa + talabat + noon).toFixed(2);
+</script>
+
+</body>
+</html>
