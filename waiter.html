@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Waiter Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<style>
+body { font-family: Arial; padding: 20px; background: #f7f7f7; }
+h2 { text-align:center; }
+.menu-item { padding: 12px; margin: 8px 0; background:#fff; border-radius:8px; box-shadow:0 2px 4px #ccc; }
+button { padding:10px 15px; background:#2196F3; color:#fff; border:none; border-radius:6px; }
+#cart { margin-top:20px; }
+.cart-item { background:#fff; padding:10px; margin:5px 0; border-radius:6px; }
+</style>
+</head>
+
+<body>
+
+<h2>Waiter Order Screen</h2>
+
+<div id="menu"></div>
+
+<h3>Cart</h3>
+<div id="cart"></div>
+<button onclick="sendOrder()">Send to Kitchen</button>
+
+<script>
+// Load menu from products.json
+fetch("products.json")
+.then(res => res.json())
+.then(data => {
+    let menu = document.getElementById("menu");
+    data.forEach(item => {
+        menu.innerHTML += `
+            <div class="menu-item">
+                <b>${item.name}</b> - ${item.price} AED
+                <button onclick="addToCart('${item.name}', ${item.price})">Add</button>
+            </div>
+        `;
+    });
+});
+
+let cart = [];
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    showCart();
+}
+
+function showCart() {
+    let c = document.getElementById("cart");
+    c.innerHTML = "";
+    cart.forEach((i, index) => {
+        c.innerHTML += `<div class="cart-item">${i.name} - ${i.price} AED 
+        <button onclick="removeItem(${index})">X</button></div>`;
+    });
+}
+
+function removeItem(i) {
+    cart.splice(i, 1);
+    showCart();
+}
+
+// Send order to kitchen
+function sendOrder() {
+    if (cart.length === 0) return alert("Cart empty!");
+
+    let allOrders = JSON.parse(localStorage.getItem("kitchenOrders") || "[]");
+
+    allOrders.push({
+        id: Date.now(),
+        items: cart,
+        status: "NEW",
+        time: new Date().toLocaleTimeString()
+    });
+
+    localStorage.setItem("kitchenOrders", JSON.stringify(allOrders));
+
+    cart = [];
+    showCart();
+    alert("Order Sent to Kitchen!");
+}
+</script>
+
+</body>
+</html>
